@@ -3,17 +3,28 @@ package com.example.doctorappointment.feature.home
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.doctorappointment.feature.core.ViewModel.MainViewModel
 
 @Composable
 fun MainScreen(
-
+    viewModel: MainViewModel
 ) {
+    val categories by viewModel.category.observeAsState(emptyList())
+
+
+    LaunchedEffect(Unit) {
+        if (categories.isEmpty())
+            viewModel.loadCategory()
+    }
     var selectedBottom by remember { mutableStateOf(0) }
 
     Scaffold(
@@ -28,12 +39,15 @@ fun MainScreen(
         LazyColumn(
             contentPadding = inner
         ) {
+            item { HomeHeader() }
+            item { Banner() }
             item {
-                HomeHeader()
+                SectionHeader(
+                    title = "Doctor Speciality",
+                    onSeeAll = null
+                )
             }
-            item {
-                Banner()
-            }
+            item { CategoryRow(items = categories) }
         }
     }
 }
@@ -41,5 +55,6 @@ fun MainScreen(
 @Preview
 @Composable
 fun MainScreenPreview() {
-    MainScreen()
+    val viewModel: MainViewModel = viewModel()
+    MainScreen(viewModel)
 }
