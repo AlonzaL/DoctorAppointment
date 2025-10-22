@@ -28,7 +28,12 @@ fun MainScreen(
         LazyColumn(
             contentPadding = inner
         ) {
-
+            item {
+                HomeHeader()
+            }
+            item {
+                Banner()
+            }
         }
     }
 }
