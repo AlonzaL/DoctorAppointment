@@ -1,9 +1,9 @@
-package com.example.doctorappointment.feature.core.ViewModel
+package com.example.doctorappointment.core.ViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.doctorappointment.feature.core.model.CategoryModel
+import com.example.doctorappointment.core.model.CategoryModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -16,14 +16,14 @@ class MainViewModel: ViewModel() {
 
     val category: LiveData<List<CategoryModel>> = _category
 
-    private var categoryLoad = false
+    private var categoryLoaded = false
 
     fun loadCategory(
         force: Boolean = false
     ) {
-        if(categoryLoad && !force)
+        if(categoryLoaded && !force)
             return
-        categoryLoad = true
+        categoryLoaded = true
         var ref = db.getReference("Category")
         ref.addListenerForSingleValueEvent(
             object : ValueEventListener {
@@ -38,7 +38,7 @@ class MainViewModel: ViewModel() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    categoryLoad = false
+                    categoryLoaded = false
                 }
 
             }

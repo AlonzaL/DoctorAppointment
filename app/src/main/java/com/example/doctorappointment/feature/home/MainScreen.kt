@@ -12,7 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.doctorappointment.feature.core.ViewModel.MainViewModel
+import com.example.doctorappointment.core.ViewModel.MainViewModel
 
 @Composable
 fun MainScreen(
@@ -25,6 +25,7 @@ fun MainScreen(
         if (categories.isEmpty())
             viewModel.loadCategory()
     }
+
     var selectedBottom by remember { mutableStateOf(0) }
 
     Scaffold(

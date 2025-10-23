@@ -21,12 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.doctorappointment.R
-import com.example.doctorappointment.feature.core.model.CategoryModel
+import com.example.doctorappointment.core.model.CategoryModel
 
 @Composable
 private fun CategoryItem(
@@ -50,18 +49,18 @@ private fun CategoryItem(
             contentAlignment = Alignment.Center
         ) {
             AsyncImage(
-                model = item.Pictere,
+                model = item.Picture,
                 contentDescription = null,
                 modifier = Modifier
                     .size(30.dp),
                 contentScale = ContentScale.Fit
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = item.Name ?: "",
-                color = colorResource(R.color.darkPurple)
-            )
         }
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = item.Name ?: "",
+            color = colorResource(R.color.darkPurple)
+        )
     }
 }
 
@@ -71,7 +70,7 @@ private fun CategoryItemPreview() {
     val item = CategoryModel(
         Id = 1,
         Name = "Category",
-        Pictere = "picture_url"
+        Picture = "picture_url"
     )
     CategoryItem(item = item)
 }
