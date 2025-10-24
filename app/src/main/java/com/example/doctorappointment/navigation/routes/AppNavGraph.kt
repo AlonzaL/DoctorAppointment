@@ -16,7 +16,7 @@ fun AppNavGraph(
     NavHost(
         navController = navController,
         startDestination = Screen.Intro.route
-    ){
+    ) {
         introRoute(
             onStart = {
                 navController.navigate(Screen.Home.route) {
@@ -29,6 +29,11 @@ fun AppNavGraph(
 
         homeRoute(
             viewModel = viewModel
+        )
+
+        detailRoute(
+            navController = navController,
+            onBack = { navController.popBackStack() }
         )
     }
 }
