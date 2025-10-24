@@ -13,10 +13,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.doctorappointment.core.ViewModel.MainViewModel
+import com.example.doctorappointment.core.model.DoctorModel
 
 @Composable
 fun MainScreen(
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
+    onOpenDoctorDetail: (DoctorModel) -> Unit
 ) {
     val categories by viewModel.category.observeAsState(emptyList())
     val doctors by viewModel.doctor.observeAsState(emptyList())
@@ -45,9 +47,9 @@ fun MainScreen(
             item { HomeHeader() }
             item { Banner() }
             item { SectionHeader(title = "Doctor Speciality", onSeeAll = null) }
-            item { CategoryRow(items = categories) }
+            item { CategoryRow(items = categories, onClick = {}) }
             item { SectionHeader(title = "Doctor Speciality", onSeeAll = null) }
-            item { DoctorRow(items = doctors, onClick = {}) }
+            item { DoctorRow(items = doctors, onClick = onOpenDoctorDetail) }
         }
     }
 }
@@ -56,5 +58,5 @@ fun MainScreen(
 @Composable
 fun MainScreenPreview() {
     val viewModel: MainViewModel = viewModel()
-    MainScreen(viewModel)
+    MainScreen(viewModel, onOpenDoctorDetail = {})
 }

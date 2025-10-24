@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.doctorappointment.R
 import com.example.doctorappointment.core.model.CategoryModel
+import com.example.doctorappointment.core.model.DoctorModel
 
 @Composable
 private fun CategoryItem(
@@ -77,13 +78,14 @@ private fun CategoryItemPreview() {
 
 @Composable
 fun CategoryRow(
-    items: List<CategoryModel>
+    items: List<CategoryModel>,
+    onClick: (DoctorModel) -> Unit
 ) {
     Box(
         modifier = Modifier
             .heightIn(min = 100.dp)
     ) {
-        if(items.isEmpty()) {
+        if (items.isEmpty()) {
             CircularProgressIndicator(
                 modifier = Modifier
                     .align(Alignment.Center)

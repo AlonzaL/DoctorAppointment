@@ -1,5 +1,9 @@
 package com.example.doctorappointment.core.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class DoctorModel(
     val Name: String = "",
     val Special: String = "",
@@ -13,4 +17,4 @@ data class DoctorModel(
     val Mobile: String = "",
     val Patiens: String = "",
     val Site: String = ""
-)
+) : Parcelable

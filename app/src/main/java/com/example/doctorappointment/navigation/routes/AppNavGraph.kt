@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.doctorappointment.core.ViewModel.MainViewModel
 import com.example.doctorappointment.navigation.Screen
+import com.example.doctorappointment.navigation.navigateToDetail
 import com.example.doctorappointment.navigation.routes.introRoute
 
 @Composable
@@ -28,7 +29,10 @@ fun AppNavGraph(
         )
 
         homeRoute(
-            viewModel = viewModel
+            viewModel = viewModel,
+            onOpenDetail = {doctorModel ->
+                navController.navigateToDetail(doctorModel)
+            }
         )
 
         detailRoute(
