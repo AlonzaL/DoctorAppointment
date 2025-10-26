@@ -18,6 +18,7 @@ import com.example.doctorappointment.core.model.DoctorModel
 @Composable
 fun MainScreen(
     viewModel: MainViewModel,
+    onOpenTopDoctors: () -> Unit,
     onOpenDoctorDetail: (DoctorModel) -> Unit
 ) {
     val categories by viewModel.category.observeAsState(emptyList())
@@ -48,7 +49,7 @@ fun MainScreen(
             item { Banner() }
             item { SectionHeader(title = "Doctor Speciality", onSeeAll = null) }
             item { CategoryRow(items = categories, onClick = {}) }
-            item { SectionHeader(title = "Doctor Speciality", onSeeAll = null) }
+            item { SectionHeader(title = "Top Doctors", onSeeAll = onOpenTopDoctors) }
             item { DoctorRow(items = doctors, onClick = onOpenDoctorDetail) }
         }
     }
@@ -58,5 +59,5 @@ fun MainScreen(
 @Composable
 fun MainScreenPreview() {
     val viewModel: MainViewModel = viewModel()
-    MainScreen(viewModel, onOpenDoctorDetail = {})
+    MainScreen(viewModel, onOpenTopDoctors = {}, onOpenDoctorDetail = {})
 }
